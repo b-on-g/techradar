@@ -2,6 +2,29 @@ namespace $.$$ {
 
 	$mol_style_define( $bog_techradar_app, {
 
+		Header: {
+			display: 'flex',
+			flexDirection: 'column',
+			padding: {
+				top: $mol_gap.block,
+				left: $mol_gap.block,
+				right: $mol_gap.block,
+			},
+		},
+
+		Header_title: {
+			display: 'block',
+			color: $bog_theme.text,
+			font: { size: '28px', weight: 700 },
+		},
+
+		Header_date: {
+			display: 'block',
+			color: $bog_theme.shade,
+			font: { size: '13px' },
+			padding: { top: '2px' },
+		},
+
 		Info: {
 			display: 'flex',
 			flexDirection: 'column',
@@ -51,7 +74,7 @@ namespace $.$$ {
 
 		Layout: {
 			display: 'grid',
-			gridTemplateColumns: '240px 1fr 240px',
+			gridTemplateColumns: '260px 1fr 260px',
 			gridTemplateRows: 'auto auto',
 			gridTemplateAreas: '"techniques radar tools" "libraries radar languages"',
 			gap: $mol_gap.text,
@@ -82,27 +105,44 @@ namespace $.$$ {
 
 		Q_block_techniques_title: {
 			display: 'block',
-			font: { size: '15px', weight: 700 },
+			font: { size: '20px', weight: 700 },
 			color: $bog_theme.text,
-			padding: { bottom: '2px' },
+			padding: { bottom: '4px' },
 		},
 		Q_block_tools_title: {
 			display: 'block',
-			font: { size: '15px', weight: 700 },
+			font: { size: '20px', weight: 700 },
 			color: $bog_theme.text,
-			padding: { bottom: '2px' },
+			padding: { bottom: '4px' },
 		},
 		Q_block_libraries_title: {
 			display: 'block',
-			font: { size: '15px', weight: 700 },
+			font: { size: '20px', weight: 700 },
 			color: $bog_theme.text,
-			padding: { bottom: '2px' },
+			padding: { bottom: '4px' },
 		},
 		Q_block_languages_title: {
 			display: 'block',
-			font: { size: '15px', weight: 700 },
+			font: { size: '20px', weight: 700 },
 			color: $bog_theme.text,
-			padding: { bottom: '2px' },
+			padding: { bottom: '4px' },
+		},
+
+		Q_block_techniques_list: {
+			display: 'flex',
+			flexDirection: 'column',
+		},
+		Q_block_tools_list: {
+			display: 'flex',
+			flexDirection: 'column',
+		},
+		Q_block_libraries_list: {
+			display: 'flex',
+			flexDirection: 'column',
+		},
+		Q_block_languages_list: {
+			display: 'flex',
+			flexDirection: 'column',
 		},
 
 		Radar_box: {
@@ -131,11 +171,10 @@ namespace $.$$ {
 
 		R_header: {
 			display: 'block',
-			font: { size: '12px', weight: 700 },
+			font: { size: '13px', weight: 700 },
 			color: $bog_theme.shade,
 			padding: {
-				top: $mol_gap.text,
-				bottom: '1px',
+				top: '6px',
 			},
 			'@': {
 				'data-ring': {
@@ -151,16 +190,16 @@ namespace $.$$ {
 			display: 'block',
 			color: $bog_theme.text,
 			textDecoration: 'none',
-			padding: { top: '1px', bottom: '1px' },
 			font: { size: '12px' },
+			lineHeight: '1.5',
 			userSelect: 'none',
 		},
 
 		Blip_text: {
 			display: 'block',
 			color: $bog_theme.text,
-			padding: { top: '1px', bottom: '1px' },
 			font: { size: '12px' },
+			lineHeight: '1.5',
 			userSelect: 'none',
 		},
 

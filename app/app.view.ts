@@ -69,6 +69,10 @@ namespace $.$$ {
 			return this.config().entries
 		}
 
+		header_date_text() {
+			return this.config().date || ''
+		}
+
 		@ $mol_mem
 		hovered_blip( next?: number | null ): number | null {
 			return next ?? null
