@@ -3100,6 +3100,39 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_svg_text extends $mol_svg {
+		pos_x( ): string
+		pos_y( ): string
+		align( ): string
+		align_hor( ): ReturnType< $mol_svg_text['align'] >
+		align_vert( ): string
+		text( ): string
+		dom_name( ): string
+		pos( ): readonly(any)[]
+		attr( ): ({ 
+			'x': ReturnType< $mol_svg_text['pos_x'] >,
+			'y': ReturnType< $mol_svg_text['pos_y'] >,
+			'text-anchor': ReturnType< $mol_svg_text['align_hor'] >,
+			'alignment-baseline': ReturnType< $mol_svg_text['align_vert'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_svg_text extends $.$mol_svg_text {
+        pos_x(): any;
+        pos_y(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	export class $mol_svg_circle extends $mol_svg {
 		radius( ): string
 		pos_x( ): string
@@ -3158,37 +3191,13 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	export class $mol_svg_text extends $mol_svg {
-		pos_x( ): string
-		pos_y( ): string
-		align( ): string
-		align_hor( ): ReturnType< $mol_svg_text['align'] >
-		align_vert( ): string
-		text( ): string
+	export class $mol_svg_group extends $mol_svg {
 		dom_name( ): string
-		pos( ): readonly(any)[]
-		attr( ): ({ 
-			'x': ReturnType< $mol_svg_text['pos_x'] >,
-			'y': ReturnType< $mol_svg_text['pos_y'] >,
-			'text-anchor': ReturnType< $mol_svg_text['align_hor'] >,
-			'alignment-baseline': ReturnType< $mol_svg_text['align_vert'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-		sub( ): readonly(any)[]
 	}
 	
 }
 
-//# sourceMappingURL=text.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_svg_text extends $.$mol_svg_text {
-        pos_x(): any;
-        pos_y(): any;
-    }
-}
-
-declare namespace $ {
-}
-
+//# sourceMappingURL=group.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_pop_over extends $mol_pop {
@@ -3462,18 +3471,18 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_svg_root__view_box_bog_techradar_app_12 = $mol_type_enforce<
-		string
+	type $mol_view__sub_bog_techradar_app_12 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $mol_svg_root['view_box'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_svg_root__sub_bog_techradar_app_13 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['radar_items'] >
+	type $mol_list__rows_bog_techradar_app_13 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['q_block_techniques_items'] >
 		,
-		ReturnType< $mol_svg_root['sub'] >
+		ReturnType< $mol_list['rows'] >
 	>
 	type $mol_view__sub_bog_techradar_app_14 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_pops'] >
+		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
@@ -3483,7 +3492,7 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_list__rows_bog_techradar_app_16 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['legend_items'] >
+		ReturnType< $bog_techradar_app['q_block_tools_items'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
@@ -3492,22 +3501,127 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_svg_circle__pos_x_bog_techradar_app_18 = $mol_type_enforce<
+	type $mol_view__sub_bog_techradar_app_18 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__rows_bog_techradar_app_19 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['q_block_libraries_items'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__sub_bog_techradar_app_20 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_techradar_app_21 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__rows_bog_techradar_app_22 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['q_block_languages_items'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__sub_bog_techradar_app_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_svg_root__view_box_bog_techradar_app_24 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_svg_root['view_box'] >
+	>
+	type $mol_svg_root__event_bog_techradar_app_25 = $mol_type_enforce<
+		({ 
+			mouseleave( next?: ReturnType< $bog_techradar_app['radar_leave'] > ): ReturnType< $bog_techradar_app['radar_leave'] >,
+		})  & ReturnType< $mol_svg_root['event'] >
+		,
+		ReturnType< $mol_svg_root['event'] >
+	>
+	type $mol_svg_root__sub_bog_techradar_app_26 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['radar_items'] >
+		,
+		ReturnType< $mol_svg_root['sub'] >
+	>
+	type $mol_view__sub_bog_techradar_app_27 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['blip_pops'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_techradar_app_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_techradar_app_29 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_techradar_app_30 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_svg_path__geometry_bog_techradar_app_31 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['blip_shape_d'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	type $mol_svg_path__attr_bog_techradar_app_32 = $mol_type_enforce<
+		({ 
+			'fill': ReturnType< $bog_techradar_app['blip_color'] >,
+		})  & ReturnType< $mol_svg_path['attr'] >
+		,
+		ReturnType< $mol_svg_path['attr'] >
+	>
+	type $mol_svg_text__pos_x_bog_techradar_app_33 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['blip_x'] >
+		,
+		ReturnType< $mol_svg_text['pos_x'] >
+	>
+	type $mol_svg_text__pos_y_bog_techradar_app_34 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['blip_num_y'] >
+		,
+		ReturnType< $mol_svg_text['pos_y'] >
+	>
+	type $mol_svg_text__text_bog_techradar_app_35 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['blip_num'] >
+		,
+		ReturnType< $mol_svg_text['text'] >
+	>
+	type $mol_svg_text__attr_bog_techradar_app_36 = $mol_type_enforce<
+		({ 
+			'fill': string,
+			'font-size': string,
+			'font-weight': string,
+			'text-anchor': string,
+			'pointer-events': string,
+		})  & ReturnType< $mol_svg_text['attr'] >
+		,
+		ReturnType< $mol_svg_text['attr'] >
+	>
+	type $mol_svg_circle__pos_x_bog_techradar_app_37 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_svg_circle['pos_x'] >
 	>
-	type $mol_svg_circle__pos_y_bog_techradar_app_19 = $mol_type_enforce<
+	type $mol_svg_circle__pos_y_bog_techradar_app_38 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_svg_circle['pos_y'] >
 	>
-	type $mol_svg_circle__radius_bog_techradar_app_20 = $mol_type_enforce<
+	type $mol_svg_circle__radius_bog_techradar_app_39 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['ring_radius'] >
 		,
 		ReturnType< $mol_svg_circle['radius'] >
 	>
-	type $mol_svg_circle__attr_bog_techradar_app_21 = $mol_type_enforce<
+	type $mol_svg_circle__attr_bog_techradar_app_40 = $mol_type_enforce<
 		({ 
 			'fill': string,
 			'stroke': string,
@@ -3516,27 +3630,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_svg_circle['attr'] >
 	>
-	type $mol_svg_line__from_x_bog_techradar_app_22 = $mol_type_enforce<
+	type $mol_svg_line__from_x_bog_techradar_app_41 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['axis_from_x'] >
 		,
 		ReturnType< $mol_svg_line['from_x'] >
 	>
-	type $mol_svg_line__from_y_bog_techradar_app_23 = $mol_type_enforce<
+	type $mol_svg_line__from_y_bog_techradar_app_42 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['axis_from_y'] >
 		,
 		ReturnType< $mol_svg_line['from_y'] >
 	>
-	type $mol_svg_line__to_x_bog_techradar_app_24 = $mol_type_enforce<
+	type $mol_svg_line__to_x_bog_techradar_app_43 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['axis_to_x'] >
 		,
 		ReturnType< $mol_svg_line['to_x'] >
 	>
-	type $mol_svg_line__to_y_bog_techradar_app_25 = $mol_type_enforce<
+	type $mol_svg_line__to_y_bog_techradar_app_44 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['axis_to_y'] >
 		,
 		ReturnType< $mol_svg_line['to_y'] >
 	>
-	type $mol_svg_line__attr_bog_techradar_app_26 = $mol_type_enforce<
+	type $mol_svg_line__attr_bog_techradar_app_45 = $mol_type_enforce<
 		({ 
 			'stroke': string,
 			'stroke-width': string,
@@ -3544,139 +3658,75 @@ declare namespace $ {
 		,
 		ReturnType< $mol_svg_line['attr'] >
 	>
-	type $mol_svg_text__pos_x_bog_techradar_app_27 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['q_label_x'] >
-		,
-		ReturnType< $mol_svg_text['pos_x'] >
-	>
-	type $mol_svg_text__pos_y_bog_techradar_app_28 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['q_label_y'] >
-		,
-		ReturnType< $mol_svg_text['pos_y'] >
-	>
-	type $mol_svg_text__text_bog_techradar_app_29 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['q_label_text'] >
-		,
-		ReturnType< $mol_svg_text['text'] >
-	>
-	type $mol_svg_text__attr_bog_techradar_app_30 = $mol_type_enforce<
-		({ 
-			'fill': string,
-			'font-size': string,
-			'font-weight': string,
-			'text-anchor': string,
-		})  & ReturnType< $mol_svg_text['attr'] >
-		,
-		ReturnType< $mol_svg_text['attr'] >
-	>
-	type $mol_svg_text__pos_x_bog_techradar_app_31 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['r_label_x'] >
-		,
-		ReturnType< $mol_svg_text['pos_x'] >
-	>
-	type $mol_svg_text__pos_y_bog_techradar_app_32 = $mol_type_enforce<
+	type $mol_svg_text__pos_x_bog_techradar_app_46 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_svg_text['pos_y'] >
-	>
-	type $mol_svg_text__text_bog_techradar_app_33 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['r_label_text'] >
-		,
-		ReturnType< $mol_svg_text['text'] >
-	>
-	type $mol_svg_text__attr_bog_techradar_app_34 = $mol_type_enforce<
-		({ 
-			'fill': string,
-			'font-size': string,
-			'font-weight': string,
-			'text-anchor': string,
-		})  & ReturnType< $mol_svg_text['attr'] >
-		,
-		ReturnType< $mol_svg_text['attr'] >
-	>
-	type $mol_svg_circle__pos_x_bog_techradar_app_35 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_x'] >
-		,
-		ReturnType< $mol_svg_circle['pos_x'] >
-	>
-	type $mol_svg_circle__pos_y_bog_techradar_app_36 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_y'] >
-		,
-		ReturnType< $mol_svg_circle['pos_y'] >
-	>
-	type $mol_svg_circle__radius_bog_techradar_app_37 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_svg_circle['radius'] >
-	>
-	type $mol_svg_circle__attr_bog_techradar_app_38 = $mol_type_enforce<
-		({ 
-			'fill': ReturnType< $bog_techradar_app['blip_color'] >,
-		})  & ReturnType< $mol_svg_circle['attr'] >
-		,
-		ReturnType< $mol_svg_circle['attr'] >
-	>
-	type $mol_svg_text__pos_x_bog_techradar_app_39 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_x'] >
-		,
 		ReturnType< $mol_svg_text['pos_x'] >
 	>
-	type $mol_svg_text__pos_y_bog_techradar_app_40 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_num_y'] >
+	type $mol_svg_text__pos_y_bog_techradar_app_47 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['r_big_label_y'] >
 		,
 		ReturnType< $mol_svg_text['pos_y'] >
 	>
-	type $mol_svg_text__text_bog_techradar_app_41 = $mol_type_enforce<
-		ReturnType< $bog_techradar_app['blip_num'] >
+	type $mol_svg_text__text_bog_techradar_app_48 = $mol_type_enforce<
+		ReturnType< $bog_techradar_app['r_big_label_text'] >
 		,
 		ReturnType< $mol_svg_text['text'] >
 	>
-	type $mol_svg_text__attr_bog_techradar_app_42 = $mol_type_enforce<
+	type $mol_svg_text__attr_bog_techradar_app_49 = $mol_type_enforce<
 		({ 
-			'fill': string,
+			'fill': ReturnType< $bog_techradar_app['r_big_label_color'] >,
 			'font-size': string,
 			'font-weight': string,
 			'text-anchor': string,
+			'opacity': ReturnType< $bog_techradar_app['r_big_label_opacity'] >,
 		})  & ReturnType< $mol_svg_text['attr'] >
 		,
 		ReturnType< $mol_svg_text['attr'] >
 	>
-	type $mol_pop_over__align_bog_techradar_app_43 = $mol_type_enforce<
+	type $mol_svg_group__sub_bog_techradar_app_50 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_svg_group['sub'] >
+	>
+	type $mol_pop_over__align_bog_techradar_app_51 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_pop_over['align'] >
 	>
-	type $mol_pop_over__bubble_content_bog_techradar_app_44 = $mol_type_enforce<
+	type $mol_pop_over__event_bog_techradar_app_52 = $mol_type_enforce<
+		({ 
+			click( next?: ReturnType< $bog_techradar_app['blip_pop_click'] > ): ReturnType< $bog_techradar_app['blip_pop_click'] >,
+		})  & ReturnType< $mol_pop_over['event'] >
+		,
+		ReturnType< $mol_pop_over['event'] >
+	>
+	type $mol_pop_over__bubble_content_bog_techradar_app_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop_over['bubble_content'] >
 	>
-	type $mol_view__sub_bog_techradar_app_45 = $mol_type_enforce<
+	type $mol_view__sub_bog_techradar_app_54 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_techradar_app_46 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_link__uri_bog_techradar_app_47 = $mol_type_enforce<
+	type $mol_link__uri_bog_techradar_app_55 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['blip_row_uri'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__external_bog_techradar_app_48 = $mol_type_enforce<
+	type $mol_link__external_bog_techradar_app_56 = $mol_type_enforce<
 		boolean
 		,
 		ReturnType< $mol_link['external'] >
 	>
-	type $mol_link__title_bog_techradar_app_49 = $mol_type_enforce<
+	type $mol_link__title_bog_techradar_app_57 = $mol_type_enforce<
 		ReturnType< $bog_techradar_app['blip_row_text'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_view__sub_bog_techradar_app_50 = $mol_type_enforce<
+	type $mol_view__sub_bog_techradar_app_58 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -3691,31 +3741,48 @@ declare namespace $ {
 		Info_hold( ): $mol_view
 		Info_source( ): $mol_view
 		Info( ): $mol_view
+		Q_block_techniques_title( ): $mol_view
+		q_block_techniques_items( ): readonly(any)[]
+		Q_block_techniques_list( ): $mol_list
+		Q_block_techniques( ): $mol_view
+		Q_block_tools_title( ): $mol_view
+		q_block_tools_items( ): readonly(any)[]
+		Q_block_tools_list( ): $mol_list
+		Q_block_tools( ): $mol_view
+		Q_block_libraries_title( ): $mol_view
+		q_block_libraries_items( ): readonly(any)[]
+		Q_block_libraries_list( ): $mol_list
+		Q_block_libraries( ): $mol_view
+		Q_block_languages_title( ): $mol_view
+		q_block_languages_items( ): readonly(any)[]
+		Q_block_languages_list( ): $mol_list
+		Q_block_languages( ): $mol_view
+		radar_leave( next?: any ): any
 		radar_items( ): readonly(any)[]
 		Radar( ): $mol_svg_root
 		blip_pops( ): readonly(any)[]
 		Pops( ): $mol_view
 		Radar_box( ): $mol_view
-		legend_items( ): readonly(any)[]
-		Legend( ): $mol_list
 		Layout( ): $mol_view
+		Forms_legend( ): $mol_view
 		ring_radius( id: any): string
 		axis_from_x( id: any): string
 		axis_from_y( id: any): string
 		axis_to_x( id: any): string
 		axis_to_y( id: any): string
-		q_label_x( id: any): string
-		q_label_y( id: any): string
-		q_label_text( id: any): string
-		r_label_x( id: any): string
-		r_label_text( id: any): string
-		blip_x( id: any): string
-		blip_y( id: any): string
+		r_big_label_y( id: any): string
+		r_big_label_text( id: any): string
+		r_big_label_color( id: any): string
+		r_big_label_opacity( id: any): string
+		blip_shape_d( id: any): string
 		blip_color( id: any): string
+		Blip_shape( id: any): $mol_svg_path
+		blip_x( id: any): string
 		blip_num_y( id: any): string
 		blip_num( id: any): string
-		blip_pop_text( id: any): string
-		q_header_text( id: any): string
+		Blip_num( id: any): $mol_svg_text
+		blip_pop_click( id: any, next?: any ): any
+		blip_label( id: any): string
 		r_header_text( id: any): string
 		blip_row_uri( id: any): string
 		blip_row_text( id: any): string
@@ -3725,12 +3792,9 @@ declare namespace $ {
 		body( ): readonly(any)[]
 		Ring( id: any): $mol_svg_circle
 		Axis( id: any): $mol_svg_line
-		Q_label( id: any): $mol_svg_text
-		R_label( id: any): $mol_svg_text
-		Blip_dot( id: any): $mol_svg_circle
-		Blip_num( id: any): $mol_svg_text
+		R_big_label( id: any): $mol_svg_text
+		Blip( id: any): $mol_svg_group
 		Blip_pop( id: any): $mol_pop_over
-		Q_header( id: any): $mol_view
 		R_header( id: any): $mol_view
 		Blip_row( id: any): $mol_link
 		Blip_text( id: any): $mol_view
@@ -3744,19 +3808,22 @@ declare namespace $.$$ {
         label: string;
         quadrant: number;
         ring: number;
+        moved?: number;
         link?: string;
     };
     type LegendItem = {
-        kind: 'q';
-        text: string;
-    } | {
         kind: 'r';
         text: string;
+        quadrant: number;
+        ring: number;
     } | {
         kind: 'b';
         text: string;
         link: string;
         hasLink: boolean;
+        blipIdx: number;
+        quadrant: number;
+        ring: number;
     };
     type Config = {
         date?: string;
@@ -3766,6 +3833,9 @@ declare namespace $.$$ {
     export class $bog_techradar_app extends $.$bog_techradar_app {
         config(): Config;
         entries(): readonly Entry[];
+        hovered_blip(next?: number | null): number | null;
+        radar_leave(e?: Event | null): void;
+        blip_pop_click(id: number, e?: Event | null): void;
         blip_positions(): readonly {
             x: number;
             y: number;
@@ -3775,25 +3845,35 @@ declare namespace $.$$ {
         axis_from_y(id: number): string;
         axis_to_x(id: number): string;
         axis_to_y(id: number): string;
-        q_label_x(id: number): string;
-        q_label_y(id: number): string;
-        q_label_text(id: number): string;
-        r_label_x(id: number): string;
-        r_label_text(id: number): string;
+        r_big_label_y(id: number): string;
+        r_big_label_text(id: number): string;
+        r_big_label_color(id: number): string;
+        r_big_label_opacity(id: number): string;
         blip_x(id: number): string;
         blip_y(id: number): string;
         blip_num_y(id: number): string;
         blip_color(id: number): string;
         blip_num(id: number): string;
+        blip_shape_d(id: number): string;
+        blip_label(id: number): string;
+        blip_pops(): $.$mol_pop_over[];
         radar_items(): readonly any[];
         legend_struct(): readonly LegendItem[];
-        q_header_text(id: number): string;
         r_header_text(id: number): string;
         blip_row_text(id: number): string;
         blip_row_uri(id: number): string;
-        legend_items(): $mol_view[];
-        blip_pop_text(id: number): string;
-        blip_pops(): $.$mol_pop_over[];
+        legend_items_for_quadrant(q: number): $mol_view[];
+        q_block_techniques_items(): $mol_view[];
+        q_block_tools_items(): $mol_view[];
+        q_block_libraries_items(): $mol_view[];
+        q_block_languages_items(): $mol_view[];
+        R_header(id: number): $mol_view;
+        row_active_style(id: number): {
+            background: string;
+            fontWeight: string;
+        };
+        Blip_row(id: number): $.$mol_link;
+        Blip_text(id: number): $mol_view;
         Blip_pop(id: number): $.$mol_pop_over;
     }
     export {};

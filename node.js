@@ -8138,6 +8138,76 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_svg_text) = class $mol_svg_text extends ($.$mol_svg) {
+		pos_x(){
+			return "";
+		}
+		pos_y(){
+			return "";
+		}
+		align(){
+			return "middle";
+		}
+		align_hor(){
+			return (this.align());
+		}
+		align_vert(){
+			return "baseline";
+		}
+		text(){
+			return "";
+		}
+		dom_name(){
+			return "text";
+		}
+		pos(){
+			return [];
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"x": (this.pos_x()), 
+				"y": (this.pos_y()), 
+				"text-anchor": (this.align_hor()), 
+				"alignment-baseline": (this.align_vert())
+			};
+		}
+		sub(){
+			return [(this.text())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_svg_text extends $.$mol_svg_text {
+            pos_x() {
+                return this.pos()[0];
+            }
+            pos_y() {
+                return this.pos()[1];
+            }
+        }
+        $$.$mol_svg_text = $mol_svg_text;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/svg/text/text.view.css", "[mol_svg_text] {\n\tfill: currentColor;\n\tstroke: none;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_svg_circle) = class $mol_svg_circle extends ($.$mol_svg) {
 		radius(){
 			return ".5%";
@@ -8260,42 +8330,9 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_svg_text) = class $mol_svg_text extends ($.$mol_svg) {
-		pos_x(){
-			return "";
-		}
-		pos_y(){
-			return "";
-		}
-		align(){
-			return "middle";
-		}
-		align_hor(){
-			return (this.align());
-		}
-		align_vert(){
-			return "baseline";
-		}
-		text(){
-			return "";
-		}
+	($.$mol_svg_group) = class $mol_svg_group extends ($.$mol_svg) {
 		dom_name(){
-			return "text";
-		}
-		pos(){
-			return [];
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"x": (this.pos_x()), 
-				"y": (this.pos_y()), 
-				"text-anchor": (this.align_hor()), 
-				"alignment-baseline": (this.align_vert())
-			};
-		}
-		sub(){
-			return [(this.text())];
+			return "g";
 		}
 	};
 
@@ -8303,31 +8340,6 @@ var $;
 ;
 "use strict";
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_svg_text extends $.$mol_svg_text {
-            pos_x() {
-                return this.pos()[0];
-            }
-            pos_y() {
-                return this.pos()[1];
-            }
-        }
-        $$.$mol_svg_text = $mol_svg_text;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/svg/text/text.view.css", "[mol_svg_text] {\n\tfill: currentColor;\n\tstroke: none;\n}\n");
-})($ || ($ = {}));
 
 ;
 	($.$mol_pop_over) = class $mol_pop_over extends ($.$mol_pop) {
@@ -8659,12 +8671,89 @@ var $;
 			]);
 			return obj;
 		}
+		Q_block_techniques_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Techniques"]);
+			return obj;
+		}
+		q_block_techniques_items(){
+			return [];
+		}
+		Q_block_techniques_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.q_block_techniques_items()));
+			return obj;
+		}
+		Q_block_techniques(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Q_block_techniques_title()), (this.Q_block_techniques_list())]);
+			return obj;
+		}
+		Q_block_tools_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Tools & Environment"]);
+			return obj;
+		}
+		q_block_tools_items(){
+			return [];
+		}
+		Q_block_tools_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.q_block_tools_items()));
+			return obj;
+		}
+		Q_block_tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Q_block_tools_title()), (this.Q_block_tools_list())]);
+			return obj;
+		}
+		Q_block_libraries_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Libraries"]);
+			return obj;
+		}
+		q_block_libraries_items(){
+			return [];
+		}
+		Q_block_libraries_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.q_block_libraries_items()));
+			return obj;
+		}
+		Q_block_libraries(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Q_block_libraries_title()), (this.Q_block_libraries_list())]);
+			return obj;
+		}
+		Q_block_languages_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Languages & Frameworks"]);
+			return obj;
+		}
+		q_block_languages_items(){
+			return [];
+		}
+		Q_block_languages_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.q_block_languages_items()));
+			return obj;
+		}
+		Q_block_languages(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Q_block_languages_title()), (this.Q_block_languages_list())]);
+			return obj;
+		}
+		radar_leave(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		radar_items(){
 			return [];
 		}
 		Radar(){
 			const obj = new this.$.$mol_svg_root();
 			(obj.view_box) = () => ("-700 -500 1400 1000");
+			(obj.event) = () => ({...(this.$.$mol_svg_root.prototype.event.call(obj)), "mouseleave": (next) => (this.radar_leave(next))});
 			(obj.sub) = () => ((this.radar_items()));
 			return obj;
 		}
@@ -8681,17 +8770,20 @@ var $;
 			(obj.sub) = () => ([(this.Radar()), (this.Pops())]);
 			return obj;
 		}
-		legend_items(){
-			return [];
-		}
-		Legend(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.legend_items()));
-			return obj;
-		}
 		Layout(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Radar_box()), (this.Legend())]);
+			(obj.sub) = () => ([
+				(this.Q_block_techniques()), 
+				(this.Q_block_tools()), 
+				(this.Q_block_libraries()), 
+				(this.Q_block_languages()), 
+				(this.Radar_box())
+			]);
+			return obj;
+		}
+		Forms_legend(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["▲ moved up    ▼ moved down    ★ new    ⬤ no change"]);
 			return obj;
 		}
 		ring_radius(id){
@@ -8709,29 +8801,32 @@ var $;
 		axis_to_y(id){
 			return "0";
 		}
-		q_label_x(id){
+		r_big_label_y(id){
 			return "0";
 		}
-		q_label_y(id){
-			return "0";
-		}
-		q_label_text(id){
+		r_big_label_text(id){
 			return "";
 		}
-		r_label_x(id){
-			return "0";
+		r_big_label_color(id){
+			return "#5ba300";
 		}
-		r_label_text(id){
+		r_big_label_opacity(id){
+			return "0.25";
+		}
+		blip_shape_d(id){
 			return "";
-		}
-		blip_x(id){
-			return "0";
-		}
-		blip_y(id){
-			return "0";
 		}
 		blip_color(id){
 			return "#5ba300";
+		}
+		Blip_shape(id){
+			const obj = new this.$.$mol_svg_path();
+			(obj.geometry) = () => ((this.blip_shape_d(id)));
+			(obj.attr) = () => ({...(this.$.$mol_svg_path.prototype.attr.call(obj)), "fill": (this.blip_color(id))});
+			return obj;
+		}
+		blip_x(id){
+			return "0";
 		}
 		blip_num_y(id){
 			return "0";
@@ -8739,10 +8834,26 @@ var $;
 		blip_num(id){
 			return "";
 		}
-		blip_pop_text(id){
-			return "";
+		Blip_num(id){
+			const obj = new this.$.$mol_svg_text();
+			(obj.pos_x) = () => ((this.blip_x(id)));
+			(obj.pos_y) = () => ((this.blip_num_y(id)));
+			(obj.text) = () => ((this.blip_num(id)));
+			(obj.attr) = () => ({
+				...(this.$.$mol_svg_text.prototype.attr.call(obj)), 
+				"fill": "#fff", 
+				"font-size": "11", 
+				"font-weight": "bold", 
+				"text-anchor": "middle", 
+				"pointer-events": "none"
+			});
+			return obj;
 		}
-		q_header_text(id){
+		blip_pop_click(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		blip_label(id){
 			return "";
 		}
 		r_header_text(id){
@@ -8764,7 +8875,11 @@ var $;
 			return [(this.Lights())];
 		}
 		body(){
-			return [(this.Info()), (this.Layout())];
+			return [
+				(this.Info()), 
+				(this.Layout()), 
+				(this.Forms_legend())
+			];
 		}
 		Ring(id){
 			const obj = new this.$.$mol_svg_circle();
@@ -8792,65 +8907,31 @@ var $;
 			});
 			return obj;
 		}
-		Q_label(id){
+		R_big_label(id){
 			const obj = new this.$.$mol_svg_text();
-			(obj.pos_x) = () => ((this.q_label_x(id)));
-			(obj.pos_y) = () => ((this.q_label_y(id)));
-			(obj.text) = () => ((this.q_label_text(id)));
+			(obj.pos_x) = () => ("0");
+			(obj.pos_y) = () => ((this.r_big_label_y(id)));
+			(obj.text) = () => ((this.r_big_label_text(id)));
 			(obj.attr) = () => ({
 				...(this.$.$mol_svg_text.prototype.attr.call(obj)), 
-				"fill": "#333", 
-				"font-size": "20", 
+				"fill": (this.r_big_label_color(id)), 
+				"font-size": "42", 
 				"font-weight": "bold", 
-				"text-anchor": "middle"
+				"text-anchor": "middle", 
+				"opacity": (this.r_big_label_opacity(id))
 			});
 			return obj;
 		}
-		R_label(id){
-			const obj = new this.$.$mol_svg_text();
-			(obj.pos_x) = () => ((this.r_label_x(id)));
-			(obj.pos_y) = () => ("-8");
-			(obj.text) = () => ((this.r_label_text(id)));
-			(obj.attr) = () => ({
-				...(this.$.$mol_svg_text.prototype.attr.call(obj)), 
-				"fill": "#888", 
-				"font-size": "14", 
-				"font-weight": "bold", 
-				"text-anchor": "middle"
-			});
-			return obj;
-		}
-		Blip_dot(id){
-			const obj = new this.$.$mol_svg_circle();
-			(obj.pos_x) = () => ((this.blip_x(id)));
-			(obj.pos_y) = () => ((this.blip_y(id)));
-			(obj.radius) = () => ("12");
-			(obj.attr) = () => ({...(this.$.$mol_svg_circle.prototype.attr.call(obj)), "fill": (this.blip_color(id))});
-			return obj;
-		}
-		Blip_num(id){
-			const obj = new this.$.$mol_svg_text();
-			(obj.pos_x) = () => ((this.blip_x(id)));
-			(obj.pos_y) = () => ((this.blip_num_y(id)));
-			(obj.text) = () => ((this.blip_num(id)));
-			(obj.attr) = () => ({
-				...(this.$.$mol_svg_text.prototype.attr.call(obj)), 
-				"fill": "#fff", 
-				"font-size": "11", 
-				"font-weight": "bold", 
-				"text-anchor": "middle"
-			});
+		Blip(id){
+			const obj = new this.$.$mol_svg_group();
+			(obj.sub) = () => ([(this.Blip_shape(id)), (this.Blip_num(id))]);
 			return obj;
 		}
 		Blip_pop(id){
 			const obj = new this.$.$mol_pop_over();
 			(obj.align) = () => ("top_center");
-			(obj.bubble_content) = () => ([(this.blip_pop_text(id))]);
-			return obj;
-		}
-		Q_header(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.q_header_text(id))]);
+			(obj.event) = () => ({...(this.$.$mol_pop_over.prototype.event.call(obj)), "click": (next) => (this.blip_pop_click(id, next))});
+			(obj.bubble_content) = () => ([(this.blip_label(id))]);
 			return obj;
 		}
 		R_header(id){
@@ -8880,19 +8961,32 @@ var $;
 	($mol_mem(($.$bog_techradar_app.prototype), "Info_hold"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Info_source"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Info"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_techniques_title"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_techniques_list"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_techniques"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_tools_title"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_tools_list"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_tools"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_libraries_title"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_libraries_list"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_libraries"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_languages_title"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_languages_list"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Q_block_languages"));
+	($mol_mem(($.$bog_techradar_app.prototype), "radar_leave"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Radar"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Pops"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Radar_box"));
-	($mol_mem(($.$bog_techradar_app.prototype), "Legend"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Layout"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Forms_legend"));
+	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_shape"));
+	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_num"));
+	($mol_mem_key(($.$bog_techradar_app.prototype), "blip_pop_click"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "Ring"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "Axis"));
-	($mol_mem_key(($.$bog_techradar_app.prototype), "Q_label"));
-	($mol_mem_key(($.$bog_techradar_app.prototype), "R_label"));
-	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_dot"));
-	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_num"));
+	($mol_mem_key(($.$bog_techradar_app.prototype), "R_big_label"));
+	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_pop"));
-	($mol_mem_key(($.$bog_techradar_app.prototype), "Q_header"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "R_header"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_row"));
 	($mol_mem_key(($.$bog_techradar_app.prototype), "Blip_text"));
@@ -9197,12 +9291,6 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const QUADRANT_NAMES = [
-            'Languages & Frameworks',
-            'Libraries',
-            'Techniques',
-            'Tools & Environment',
-        ];
         const RING_NAMES = ['ADOPT', 'TRIAL', 'ASSESS', 'HOLD'];
         const RING_COLORS = ['#5ba300', '#009eb0', '#c7ba00', '#e09b96'];
         const RING_BOUNDS = [
@@ -9217,19 +9305,46 @@ var $;
             [Math.PI / 2, Math.PI],
             [Math.PI, 3 * Math.PI / 2],
         ];
-        const QUADRANT_LABEL_POS = [
-            [350, -460],
-            [350, 480],
-            [-350, 480],
-            [-350, -460],
-        ];
         const MAX_AXIS = 450;
+        const BLIP_R = 12;
+        function circle_d(cx, cy, r) {
+            return `M ${cx + r} ${cy} A ${r} ${r} 0 1 1 ${cx - r} ${cy} A ${r} ${r} 0 1 1 ${cx + r} ${cy} Z`;
+        }
+        function triangle_up_d(cx, cy, r) {
+            const h = r * 1.15;
+            return `M ${cx} ${cy - h} L ${cx - r} ${cy + h * 0.65} L ${cx + r} ${cy + h * 0.65} Z`;
+        }
+        function triangle_down_d(cx, cy, r) {
+            const h = r * 1.15;
+            return `M ${cx} ${cy + h} L ${cx - r} ${cy - h * 0.65} L ${cx + r} ${cy - h * 0.65} Z`;
+        }
+        function star_d(cx, cy, R) {
+            const inner = R * 0.45;
+            const points = [];
+            for (let i = 0; i < 10; i++) {
+                const angle = -Math.PI / 2 + i * Math.PI / 5;
+                const rr = i % 2 === 0 ? R : inner;
+                points.push(`${cx + rr * Math.cos(angle)} ${cy + rr * Math.sin(angle)}`);
+            }
+            return 'M ' + points.join(' L ') + ' Z';
+        }
         class $bog_techradar_app extends $.$bog_techradar_app {
             config() {
                 return $mol_fetch.json('bog/techradar/config.json');
             }
             entries() {
                 return this.config().entries;
+            }
+            hovered_blip(next) {
+                return next ?? null;
+            }
+            radar_leave(e) {
+                this.hovered_blip(null);
+            }
+            blip_pop_click(id, e) {
+                const link = this.entries()[id].link;
+                if (link)
+                    window.open(link, '_blank', 'noopener,noreferrer');
             }
             blip_positions() {
                 const positions = [];
@@ -9266,7 +9381,6 @@ var $;
                 }
                 return positions;
             }
-            // Ring(id): outer radius
             ring_radius(id) {
                 return String(RING_BOUNDS[id][1]);
             }
@@ -9274,64 +9388,89 @@ var $;
             axis_from_y(id) { return id === 0 ? '0' : String(-MAX_AXIS); }
             axis_to_x(id) { return id === 0 ? String(MAX_AXIS) : '0'; }
             axis_to_y(id) { return id === 0 ? '0' : String(MAX_AXIS); }
-            q_label_x(id) { return String(QUADRANT_LABEL_POS[id][0]); }
-            q_label_y(id) { return String(QUADRANT_LABEL_POS[id][1]); }
-            q_label_text(id) { return QUADRANT_NAMES[id]; }
-            r_label_x(id) {
+            r_big_label_y(id) {
                 const [rIn, rOut] = RING_BOUNDS[id];
-                return String((rIn + rOut) / 2);
+                return String(-(rIn + rOut) / 2);
             }
-            r_label_text(id) { return RING_NAMES[id]; }
+            r_big_label_text(id) { return RING_NAMES[id]; }
+            r_big_label_color(id) { return RING_COLORS[id]; }
+            r_big_label_opacity(id) {
+                return ['0.25', '0.3', '0.4', '0.55'][id];
+            }
             blip_x(id) { return String(this.blip_positions()[id].x); }
             blip_y(id) { return String(this.blip_positions()[id].y); }
             blip_num_y(id) { return String(this.blip_positions()[id].y + 4); }
             blip_color(id) { return RING_COLORS[this.entries()[id].ring]; }
             blip_num(id) { return String(id + 1); }
+            blip_shape_d(id) {
+                const pos = this.blip_positions()[id];
+                const moved = this.entries()[id].moved ?? 0;
+                if (moved === 1)
+                    return triangle_up_d(pos.x, pos.y, BLIP_R);
+                if (moved === -1)
+                    return triangle_down_d(pos.x, pos.y, BLIP_R);
+                if (moved === 2)
+                    return star_d(pos.x, pos.y, BLIP_R);
+                return circle_d(pos.x, pos.y, BLIP_R);
+            }
+            blip_label(id) {
+                return this.entries()[id].label;
+            }
+            blip_pops() {
+                return this.entries().map((_, i) => this.Blip_pop(i));
+            }
             radar_items() {
                 const items = [
                     ...[3, 2, 1, 0].map(r => this.Ring(r)),
                     this.Axis(0),
                     this.Axis(1),
-                    ...[0, 1, 2, 3].map(q => this.Q_label(q)),
-                    ...[0, 1, 2, 3].map(r => this.R_label(r)),
-                    ...this.entries().flatMap((_, i) => [this.Blip_dot(i), this.Blip_num(i)]),
+                    ...[0, 1, 2, 3].map(r => this.R_big_label(r)),
+                    ...this.entries().map((_, i) => this.Blip(i)),
                 ];
                 return items;
             }
             legend_struct() {
                 const items = [];
                 for (let q = 0; q < 4; q++) {
-                    items.push({ kind: 'q', text: QUADRANT_NAMES[q] });
                     for (let r = 0; r < 4; r++) {
                         const subset = this.entries()
                             .map((e, i) => ({ e, i }))
                             .filter(x => x.e.quadrant === q && x.e.ring === r);
                         if (subset.length === 0)
                             continue;
-                        items.push({ kind: 'r', text: RING_NAMES[r] });
+                        items.push({ kind: 'r', quadrant: q, ring: r, text: RING_NAMES[r] });
                         for (const { e, i } of subset) {
                             items.push({
                                 kind: 'b',
+                                quadrant: q,
+                                ring: r,
                                 text: `${i + 1}. ${e.label}`,
                                 link: e.link || '',
                                 hasLink: Boolean(e.link),
+                                blipIdx: i,
                             });
                         }
                     }
                 }
                 return items;
             }
-            q_header_text(id) { return this.legend_struct()[id].text; }
-            r_header_text(id) { return this.legend_struct()[id].text; }
-            blip_row_text(id) { return this.legend_struct()[id].text; }
+            r_header_text(id) {
+                const it = this.legend_struct()[id];
+                return it.kind === 'r' ? it.text : '';
+            }
+            blip_row_text(id) {
+                const it = this.legend_struct()[id];
+                return it.kind === 'b' ? it.text : '';
+            }
             blip_row_uri(id) {
                 const it = this.legend_struct()[id];
                 return it.kind === 'b' ? it.link : '';
             }
-            legend_items() {
-                return this.legend_struct().map((item, i) => {
-                    if (item.kind === 'q')
-                        return this.Q_header(i);
+            legend_items_for_quadrant(q) {
+                return this.legend_struct()
+                    .map((item, i) => ({ item, i }))
+                    .filter(x => x.item.quadrant === q)
+                    .map(({ item, i }) => {
                     if (item.kind === 'r')
                         return this.R_header(i);
                     if (item.kind === 'b' && item.hasLink)
@@ -9339,14 +9478,39 @@ var $;
                     return this.Blip_text(i);
                 });
             }
-            blip_pop_text(id) {
-                return this.entries()[id].label;
+            q_block_techniques_items() { return this.legend_items_for_quadrant(2); }
+            q_block_tools_items() { return this.legend_items_for_quadrant(3); }
+            q_block_libraries_items() { return this.legend_items_for_quadrant(1); }
+            q_block_languages_items() { return this.legend_items_for_quadrant(0); }
+            R_header(id) {
+                const view = super.R_header(id);
+                const item = this.legend_struct()[id];
+                if (item.kind === 'r') {
+                    view.attr = () => ({ 'data-ring': String(item.ring) });
+                }
+                return view;
             }
-            blip_pops() {
-                return this.entries().map((_, i) => this.Blip_pop(i));
+            row_active_style(id) {
+                const item = this.legend_struct()[id];
+                const active = item.kind === 'b' && this.hovered_blip() === item.blipIdx;
+                return {
+                    background: active ? 'var(--mol_theme_hover)' : '',
+                    fontWeight: active ? '700' : '',
+                };
+            }
+            Blip_row(id) {
+                const view = super.Blip_row(id);
+                view.style = (() => this.row_active_style(id));
+                return view;
+            }
+            Blip_text(id) {
+                const view = super.Blip_text(id);
+                view.style = (() => this.row_active_style(id));
+                return view;
             }
             Blip_pop(id) {
                 const pop = super.Blip_pop(id);
+                const owner = this;
                 const view = pop;
                 view.style = () => {
                     const pos = this.blip_positions()[id];
@@ -9360,7 +9524,15 @@ var $;
                         height: '24px',
                         transform: 'translate(-50%, -50%)',
                         pointerEvents: 'auto',
+                        cursor: 'pointer',
                     };
+                };
+                view.hovered = (next) => {
+                    if (next !== undefined) {
+                        owner.hovered_blip(next ? id : null);
+                        return next;
+                    }
+                    return owner.hovered_blip() === id;
                 };
                 return pop;
             }
@@ -9370,10 +9542,28 @@ var $;
         ], $bog_techradar_app.prototype, "config", null);
         __decorate([
             $mol_mem
+        ], $bog_techradar_app.prototype, "hovered_blip", null);
+        __decorate([
+            $mol_action
+        ], $bog_techradar_app.prototype, "radar_leave", null);
+        __decorate([
+            $mol_action
+        ], $bog_techradar_app.prototype, "blip_pop_click", null);
+        __decorate([
+            $mol_mem
         ], $bog_techradar_app.prototype, "blip_positions", null);
         __decorate([
             $mol_mem
         ], $bog_techradar_app.prototype, "legend_struct", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_techradar_app.prototype, "R_header", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_techradar_app.prototype, "Blip_row", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_techradar_app.prototype, "Blip_text", null);
         __decorate([
             $mol_mem_key
         ], $bog_techradar_app.prototype, "Blip_pop", null);
@@ -9395,96 +9585,102 @@ var $;
                 padding: $mol_gap.block,
                 maxWidth: '900px',
                 color: $bog_theme.text,
-                font: {
-                    size: '14px',
-                },
+                font: { size: '13px' },
             },
             Info_intro: {
                 display: 'block',
-                font: {
-                    size: '15px',
-                    weight: 700,
-                },
+                font: { size: '14px', weight: 700 },
                 color: $bog_theme.text,
             },
             Info_adopt: {
                 display: 'block',
-                padding: {
-                    left: $mol_gap.block,
-                },
-                border: {
-                    left: {
-                        width: '3px',
-                        style: 'solid',
-                        color: '#5ba300',
-                    },
-                },
+                padding: { left: $mol_gap.block },
+                border: { left: { width: '3px', style: 'solid', color: '#5ba300' } },
             },
             Info_trial: {
                 display: 'block',
-                padding: {
-                    left: $mol_gap.block,
-                },
-                border: {
-                    left: {
-                        width: '3px',
-                        style: 'solid',
-                        color: '#009eb0',
-                    },
-                },
+                padding: { left: $mol_gap.block },
+                border: { left: { width: '3px', style: 'solid', color: '#009eb0' } },
             },
             Info_assess: {
                 display: 'block',
-                padding: {
-                    left: $mol_gap.block,
-                },
-                border: {
-                    left: {
-                        width: '3px',
-                        style: 'solid',
-                        color: '#c7ba00',
-                    },
-                },
+                padding: { left: $mol_gap.block },
+                border: { left: { width: '3px', style: 'solid', color: '#c7ba00' } },
             },
             Info_hold: {
                 display: 'block',
-                padding: {
-                    left: $mol_gap.block,
-                },
-                border: {
-                    left: {
-                        width: '3px',
-                        style: 'solid',
-                        color: '#e09b96',
-                    },
-                },
+                padding: { left: $mol_gap.block },
+                border: { left: { width: '3px', style: 'solid', color: '#e09b96' } },
             },
             Info_source: {
                 display: 'block',
-                padding: {
-                    top: $mol_gap.block,
-                },
+                padding: { top: $mol_gap.block },
                 color: $bog_theme.shade,
-                font: {
-                    size: '13px',
-                },
+                font: { size: '12px' },
             },
             Layout: {
+                display: 'grid',
+                gridTemplateColumns: '240px 1fr 240px',
+                gridTemplateRows: 'auto auto',
+                gridTemplateAreas: '"techniques radar tools" "libraries radar languages"',
+                gap: $mol_gap.text,
+                padding: $mol_gap.block,
+                alignItems: 'start',
+            },
+            Q_block_techniques: {
                 display: 'flex',
                 flexDirection: 'column',
-                gap: $mol_gap.block,
-                padding: $mol_gap.block,
+                gridArea: 'techniques',
+            },
+            Q_block_tools: {
+                display: 'flex',
+                flexDirection: 'column',
+                gridArea: 'tools',
+            },
+            Q_block_libraries: {
+                display: 'flex',
+                flexDirection: 'column',
+                gridArea: 'libraries',
+            },
+            Q_block_languages: {
+                display: 'flex',
+                flexDirection: 'column',
+                gridArea: 'languages',
+            },
+            Q_block_techniques_title: {
+                display: 'block',
+                font: { size: '15px', weight: 700 },
+                color: $bog_theme.text,
+                padding: { bottom: '2px' },
+            },
+            Q_block_tools_title: {
+                display: 'block',
+                font: { size: '15px', weight: 700 },
+                color: $bog_theme.text,
+                padding: { bottom: '2px' },
+            },
+            Q_block_libraries_title: {
+                display: 'block',
+                font: { size: '15px', weight: 700 },
+                color: $bog_theme.text,
+                padding: { bottom: '2px' },
+            },
+            Q_block_languages_title: {
+                display: 'block',
+                font: { size: '15px', weight: 700 },
+                color: $bog_theme.text,
+                padding: { bottom: '2px' },
             },
             Radar_box: {
+                gridArea: 'radar',
                 position: 'relative',
                 width: '100%',
-                maxWidth: '1100px',
+                maxWidth: '900px',
                 aspectRatio: '14 / 10',
+                alignSelf: 'center',
+                justifySelf: 'center',
             },
             Radar: {
-                position: 'absolute',
-                top: 0,
-                left: 0,
                 width: '100%',
                 height: '100%',
             },
@@ -9496,64 +9692,44 @@ var $;
                 height: '100%',
                 pointerEvents: 'none',
             },
-            Legend: {
-                width: '100%',
-                maxWidth: '700px',
-            },
-            Q_header: {
-                display: 'block',
-                font: {
-                    size: '18px',
-                    weight: 700,
-                },
-                color: $bog_theme.text,
-                padding: {
-                    top: $mol_gap.block,
-                    bottom: $mol_gap.space,
-                    left: $mol_gap.block,
-                    right: $mol_gap.block,
-                },
-                border: {
-                    bottom: {
-                        width: '1px',
-                        style: 'solid',
-                        color: $bog_theme.line,
-                    },
-                },
-            },
             R_header: {
                 display: 'block',
-                font: {
-                    size: '14px',
-                    weight: 700,
-                },
+                font: { size: '12px', weight: 700 },
                 color: $bog_theme.shade,
                 padding: {
-                    top: $mol_gap.space,
-                    bottom: '2px',
-                    left: $mol_gap.block,
-                    right: $mol_gap.block,
+                    top: $mol_gap.text,
+                    bottom: '1px',
+                },
+                '@': {
+                    'data-ring': {
+                        '0': { color: '#5ba300' },
+                        '1': { color: '#009eb0' },
+                        '2': { color: '#c7ba00' },
+                        '3': { color: '#e09b96' },
+                    },
                 },
             },
             Blip_row: {
                 display: 'block',
                 color: $bog_theme.text,
-                padding: {
-                    top: '2px',
-                    bottom: '2px',
-                    left: $mol_gap.block,
-                    right: $mol_gap.block,
-                },
+                textDecoration: 'none',
+                padding: { top: '1px', bottom: '1px' },
+                font: { size: '12px' },
+                userSelect: 'none',
             },
             Blip_text: {
                 display: 'block',
                 color: $bog_theme.text,
-                padding: {
-                    top: '2px',
-                    bottom: '2px',
-                    left: $mol_gap.block,
-                    right: $mol_gap.block,
-                },
+                padding: { top: '1px', bottom: '1px' },
+                font: { size: '12px' },
+                userSelect: 'none',
+            },
+            Forms_legend: {
+                display: 'block',
+                textAlign: 'center',
+                padding: { top: $mol_gap.text, bottom: $mol_gap.block },
+                font: { size: '12px' },
+                color: $bog_theme.shade,
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
