@@ -1,0 +1,10 @@
+{
+	"name": "bog_techradar_app",
+	"short_name": "bog_techradar_app",
+	"description": "",
+	"id": "bog_techradar_app",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000"
+}
