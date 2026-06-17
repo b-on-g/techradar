@@ -4,20 +4,19 @@ namespace $.$$ {
 		label: string
 		quadrant: number
 		ring: number
+		moved?: number
 		link?: string
 	}
 
 	type LegendItem =
-		| { kind: 'q', text: string }
-		| { kind: 'r', text: string }
-		| { kind: 'b', text: string, link: string, hasLink: boolean }
+		| { kind: 'r', text: string, quadrant: number, ring: number }
+		| { kind: 'b', text: string, link: string, hasLink: boolean, blipIdx: number, quadrant: number, ring: number }
 
-	const QUADRANT_NAMES = [
-		'Languages & Frameworks',
-		'Libraries',
-		'Techniques',
-		'Tools & Environment',
-	]
+	type Config = {
+		date?: string
+		title?: string
+		entries: Entry[]
+	}
 
 	const RING_NAMES = [ 'ADOPT', 'TRIAL', 'ASSESS', 'HOLD' ]
 	const RING_COLORS = [ '#5ba300', '#009eb0', '#c7ba00', '#e09b96' ]
@@ -33,18 +32,30 @@ namespace $.$$ {
 		[ Math.PI / 2, Math.PI ],
 		[ Math.PI, 3 * Math.PI / 2 ],
 	]
-	const QUADRANT_LABEL_POS: [ number, number ][] = [
-		[ 350, -460 ],
-		[ 350, 480 ],
-		[ -350, 480 ],
-		[ -350, -460 ],
-	]
 	const MAX_AXIS = 450
 
-	type Config = {
-		date?: string
-		title?: string
-		entries: Entry[]
+	const BLIP_R = 12
+
+	function circle_d( cx: number, cy: number, r: number ) {
+		return `M ${ cx + r } ${ cy } A ${ r } ${ r } 0 1 1 ${ cx - r } ${ cy } A ${ r } ${ r } 0 1 1 ${ cx + r } ${ cy } Z`
+	}
+	function triangle_up_d( cx: number, cy: number, r: number ) {
+		const h = r * 1.15
+		return `M ${ cx } ${ cy - h } L ${ cx - r } ${ cy + h * 0.65 } L ${ cx + r } ${ cy + h * 0.65 } Z`
+	}
+	function triangle_down_d( cx: number, cy: number, r: number ) {
+		const h = r * 1.15
+		return `M ${ cx } ${ cy + h } L ${ cx - r } ${ cy - h * 0.65 } L ${ cx + r } ${ cy - h * 0.65 } Z`
+	}
+	function star_d( cx: number, cy: number, R: number ) {
+		const inner = R * 0.45
+		const points: string[] = []
+		for ( let i = 0; i < 10; i++ ) {
+			const angle = -Math.PI / 2 + i * Math.PI / 5
+			const rr = i % 2 === 0 ? R : inner
+			points.push( `${ cx + rr * Math.cos( angle ) } ${ cy + rr * Math.sin( angle ) }` )
+		}
+		return 'M ' + points.join( ' L ' ) + ' Z'
 	}
 
 	export class $bog_techradar_app extends $.$bog_techradar_app {
@@ -56,6 +67,22 @@ namespace $.$$ {
 
 		entries(): readonly Entry[] {
 			return this.config().entries
+		}
+
+		@ $mol_mem
+		hovered_blip( next?: number | null ): number | null {
+			return next ?? null
+		}
+
+		@ $mol_action
+		radar_leave( e?: Event | null ) {
+			this.hovered_blip( null )
+		}
+
+		@ $mol_action
+		blip_pop_click( id: number, e?: Event | null ) {
+			const link = this.entries()[ id ].link
+			if ( link ) window.open( link, '_blank', 'noopener,noreferrer' )
 		}
 
 		@ $mol_mem
@@ -97,7 +124,6 @@ namespace $.$$ {
 			return positions
 		}
 
-		// Ring(id): outer radius
 		ring_radius( id: number ) {
 			return String( RING_BOUNDS[ id ][ 1 ] )
 		}
@@ -107,15 +133,15 @@ namespace $.$$ {
 		axis_to_x( id: number ) { return id === 0 ? String( MAX_AXIS ) : '0' }
 		axis_to_y( id: number ) { return id === 0 ? '0' : String( MAX_AXIS ) }
 
-		q_label_x( id: number ) { return String( QUADRANT_LABEL_POS[ id ][ 0 ] ) }
-		q_label_y( id: number ) { return String( QUADRANT_LABEL_POS[ id ][ 1 ] ) }
-		q_label_text( id: number ) { return QUADRANT_NAMES[ id ] }
-
-		r_label_x( id: number ) {
+		r_big_label_y( id: number ) {
 			const [ rIn, rOut ] = RING_BOUNDS[ id ]
-			return String( ( rIn + rOut ) / 2 )
+			return String( -( rIn + rOut ) / 2 )
 		}
-		r_label_text( id: number ) { return RING_NAMES[ id ] }
+		r_big_label_text( id: number ) { return RING_NAMES[ id ] }
+		r_big_label_color( id: number ) { return RING_COLORS[ id ] }
+		r_big_label_opacity( id: number ) {
+			return [ '0.25', '0.3', '0.4', '0.55' ][ id ]
+		}
 
 		blip_x( id: number ) { return String( this.blip_positions()[ id ].x ) }
 		blip_y( id: number ) { return String( this.blip_positions()[ id ].y ) }
@@ -123,14 +149,30 @@ namespace $.$$ {
 		blip_color( id: number ) { return RING_COLORS[ this.entries()[ id ].ring ] }
 		blip_num( id: number ) { return String( id + 1 ) }
 
+		blip_shape_d( id: number ) {
+			const pos = this.blip_positions()[ id ]
+			const moved = this.entries()[ id ].moved ?? 0
+			if ( moved === 1 ) return triangle_up_d( pos.x, pos.y, BLIP_R )
+			if ( moved === -1 ) return triangle_down_d( pos.x, pos.y, BLIP_R )
+			if ( moved === 2 ) return star_d( pos.x, pos.y, BLIP_R )
+			return circle_d( pos.x, pos.y, BLIP_R )
+		}
+
+		blip_label( id: number ) {
+			return this.entries()[ id ].label
+		}
+
+		blip_pops() {
+			return this.entries().map( ( _, i ) => this.Blip_pop( i ) )
+		}
+
 		radar_items() {
 			const items: readonly any[] = [
 				...[ 3, 2, 1, 0 ].map( r => this.Ring( r ) ),
 				this.Axis( 0 ),
 				this.Axis( 1 ),
-				...[ 0, 1, 2, 3 ].map( q => this.Q_label( q ) ),
-				...[ 0, 1, 2, 3 ].map( r => this.R_label( r ) ),
-				...this.entries().flatMap( ( _, i ) => [ this.Blip_dot( i ), this.Blip_num( i ) ] ),
+				...[ 0, 1, 2, 3 ].map( r => this.R_big_label( r ) ),
+				...this.entries().map( ( _, i ) => this.Blip( i ) ),
 			]
 			return items
 		}
@@ -139,19 +181,21 @@ namespace $.$$ {
 		legend_struct(): readonly LegendItem[] {
 			const items: LegendItem[] = []
 			for ( let q = 0; q < 4; q++ ) {
-				items.push( { kind: 'q', text: QUADRANT_NAMES[ q ] } )
 				for ( let r = 0; r < 4; r++ ) {
 					const subset = this.entries()
 						.map( ( e, i ) => ( { e, i } ) )
 						.filter( x => x.e.quadrant === q && x.e.ring === r )
 					if ( subset.length === 0 ) continue
-					items.push( { kind: 'r', text: RING_NAMES[ r ] } )
+					items.push( { kind: 'r', quadrant: q, ring: r, text: RING_NAMES[ r ] } )
 					for ( const { e, i } of subset ) {
 						items.push( {
 							kind: 'b',
+							quadrant: q,
+							ring: r,
 							text: `${ i + 1 }. ${ e.label }`,
 							link: e.link || '',
 							hasLink: Boolean( e.link ),
+							blipIdx: i,
 						} )
 					}
 				}
@@ -159,35 +203,76 @@ namespace $.$$ {
 			return items
 		}
 
-		q_header_text( id: number ) { return this.legend_struct()[ id ].text }
-		r_header_text( id: number ) { return this.legend_struct()[ id ].text }
-		blip_row_text( id: number ) { return this.legend_struct()[ id ].text }
+		r_header_text( id: number ) {
+			const it = this.legend_struct()[ id ]
+			return it.kind === 'r' ? it.text : ''
+		}
+		blip_row_text( id: number ) {
+			const it = this.legend_struct()[ id ]
+			return it.kind === 'b' ? it.text : ''
+		}
 		blip_row_uri( id: number ) {
 			const it = this.legend_struct()[ id ]
 			return it.kind === 'b' ? it.link : ''
 		}
 
-		legend_items() {
-			return this.legend_struct().map( ( item, i ) => {
-				if ( item.kind === 'q' ) return this.Q_header( i )
-				if ( item.kind === 'r' ) return this.R_header( i )
-				if ( item.kind === 'b' && item.hasLink ) return this.Blip_row( i )
-				return this.Blip_text( i )
-			} )
+		legend_items_for_quadrant( q: number ) {
+			return this.legend_struct()
+				.map( ( item, i ) => ( { item, i } ) )
+				.filter( x => x.item.quadrant === q )
+				.map( ( { item, i } ) => {
+					if ( item.kind === 'r' ) return this.R_header( i )
+					if ( item.kind === 'b' && item.hasLink ) return this.Blip_row( i )
+					return this.Blip_text( i )
+				} )
 		}
 
-		blip_pop_text( id: number ) {
-			return this.entries()[ id ].label
+		q_block_techniques_items() { return this.legend_items_for_quadrant( 2 ) }
+		q_block_tools_items() { return this.legend_items_for_quadrant( 3 ) }
+		q_block_libraries_items() { return this.legend_items_for_quadrant( 1 ) }
+		q_block_languages_items() { return this.legend_items_for_quadrant( 0 ) }
+
+		@ $mol_mem_key
+		R_header( id: number ) {
+			const view = super.R_header( id )
+			const item = this.legend_struct()[ id ]
+			if ( item.kind === 'r' ) {
+				view.attr = () => ( { 'data-ring': String( item.ring ) } )
+			}
+			return view
 		}
 
-		blip_pops() {
-			return this.entries().map( ( _, i ) => this.Blip_pop( i ) )
+		row_active_style( id: number ) {
+			const item = this.legend_struct()[ id ]
+			const active = item.kind === 'b' && this.hovered_blip() === item.blipIdx
+			return {
+				background: active ? 'var(--mol_theme_hover)' : '',
+				fontWeight: active ? '700' : '',
+			}
+		}
+
+		@ $mol_mem_key
+		Blip_row( id: number ) {
+			const view = super.Blip_row( id )
+			view.style = ( () => this.row_active_style( id ) ) as typeof view.style
+			return view
+		}
+
+		@ $mol_mem_key
+		Blip_text( id: number ) {
+			const view = super.Blip_text( id )
+			view.style = ( () => this.row_active_style( id ) ) as typeof view.style
+			return view
 		}
 
 		@ $mol_mem_key
 		Blip_pop( id: number ) {
 			const pop = super.Blip_pop( id )
-			const view = pop as unknown as { style: () => Record<string, string> }
+			const owner = this
+			const view = pop as unknown as {
+				style: () => Record<string, string>
+				hovered: ( next?: boolean ) => boolean
+			}
 			view.style = () => {
 				const pos = this.blip_positions()[ id ]
 				const leftPct = ( pos.x + 700 ) / 14
@@ -200,7 +285,15 @@ namespace $.$$ {
 					height: '24px',
 					transform: 'translate(-50%, -50%)',
 					pointerEvents: 'auto',
+					cursor: 'pointer',
 				}
+			}
+			view.hovered = ( next?: boolean ) => {
+				if ( next !== undefined ) {
+					owner.hovered_blip( next ? id : null )
+					return next
+				}
+				return owner.hovered_blip() === id
 			}
 			return pop
 		}

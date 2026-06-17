@@ -27,14 +27,39 @@ $bog_techradar_app $mol_page
 					\За основу взят Tech Radar Zalando. Похожие есть у ThoughtWorks. В России концепцию используют, например, Avito и Lamoda.
 		<= Layout $mol_view
 			sub /
+				<= Q_block_techniques $mol_view
+					sub /
+						<= Q_block_techniques_title $mol_view sub /
+							\Techniques
+						<= Q_block_techniques_list $mol_list rows <= q_block_techniques_items /
+				<= Q_block_tools $mol_view
+					sub /
+						<= Q_block_tools_title $mol_view sub /
+							\Tools & Environment
+						<= Q_block_tools_list $mol_list rows <= q_block_tools_items /
+				<= Q_block_libraries $mol_view
+					sub /
+						<= Q_block_libraries_title $mol_view sub /
+							\Libraries
+						<= Q_block_libraries_list $mol_list rows <= q_block_libraries_items /
+				<= Q_block_languages $mol_view
+					sub /
+						<= Q_block_languages_title $mol_view sub /
+							\Languages & Frameworks
+						<= Q_block_languages_list $mol_list rows <= q_block_languages_items /
 				<= Radar_box $mol_view
 					sub /
 						<= Radar $mol_svg_root
 							view_box \-700 -500 1400 1000
+							event *
+								^
+								mouseleave? <=> radar_leave?event null
 							sub <= radar_items /
 						<= Pops $mol_view
 							sub <= blip_pops /
-				<= Legend $mol_list rows <= legend_items /
+		<= Forms_legend $mol_view
+			sub /
+				\▲ moved up    ▼ moved down    ★ new    ⬤ no change
 	Ring* $mol_svg_circle
 		pos_x \0
 		pos_y \0
@@ -53,50 +78,42 @@ $bog_techradar_app $mol_page
 			^
 			stroke \#bbb
 			stroke-width \1
-	Q_label* $mol_svg_text
-		pos_x <= q_label_x* \0
-		pos_y <= q_label_y* \0
-		text <= q_label_text* \
+	R_big_label* $mol_svg_text
+		pos_x \0
+		pos_y <= r_big_label_y* \0
+		text <= r_big_label_text* \
 		attr *
 			^
-			fill \#333
-			font-size \20
+			fill <= r_big_label_color* \#5ba300
+			font-size \42
 			font-weight \bold
 			text-anchor \middle
-	R_label* $mol_svg_text
-		pos_x <= r_label_x* \0
-		pos_y \-8
-		text <= r_label_text* \
-		attr *
-			^
-			fill \#888
-			font-size \14
-			font-weight \bold
-			text-anchor \middle
-	Blip_dot* $mol_svg_circle
-		pos_x <= blip_x* \0
-		pos_y <= blip_y* \0
-		radius \12
-		attr *
-			^
-			fill <= blip_color* \#5ba300
-	Blip_num* $mol_svg_text
-		pos_x <= blip_x* \0
-		pos_y <= blip_num_y* \0
-		text <= blip_num* \
-		attr *
-			^
-			fill \#fff
-			font-size \11
-			font-weight \bold
-			text-anchor \middle
+			opacity <= r_big_label_opacity* \0.25
+	Blip* $mol_svg_group
+		sub /
+			<= Blip_shape* $mol_svg_path
+				geometry <= blip_shape_d* \
+				attr *
+					^
+					fill <= blip_color* \#5ba300
+			<= Blip_num* $mol_svg_text
+				pos_x <= blip_x* \0
+				pos_y <= blip_num_y* \0
+				text <= blip_num* \
+				attr *
+					^
+					fill \#fff
+					font-size \11
+					font-weight \bold
+					text-anchor \middle
+					pointer-events \none
 	Blip_pop* $mol_pop_over
 		align \top_center
+		event *
+			^
+			click? <=> blip_pop_click*?event null
 		bubble_content /
-			<= blip_pop_text* \
-	Q_header* $mol_view
-		sub /
-			<= q_header_text* \
+			<= blip_label* \
 	R_header* $mol_view
 		sub /
 			<= r_header_text* \
