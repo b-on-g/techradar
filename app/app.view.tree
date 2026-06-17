@@ -1,0 +1,101 @@
+$bog_techradar_app $mol_page
+	title \Tech Radar — $mol Stack
+	plugins /
+		<= Theme $bog_theme_auto
+			theme_light \$mol_theme_calm_light
+			theme_dark \$mol_theme_calm_dark
+			themes /
+				\$mol_theme_calm_light
+				\$mol_theme_calm_dark
+	tools /
+		<= Lights $bog_theme_toggle
+			theme_auto <= Theme
+	body /
+		<= Info $mol_view
+			sub /
+				<= Info_intro $mol_view sub /
+					\От центра к периферии радара идут четыре круга:
+				<= Info_adopt $mol_view sub /
+					\Adopt — технологии и инструменты, которые внедрены и активно используются в командах. Технологии, по которым в X5Tech есть экспертиза.
+				<= Info_trial $mol_view sub /
+					\Trial — технологии и инструменты, которые уже прошли этап тестирования и готовятся к работе в продакшн (или уже работают там).
+				<= Info_assess $mol_view sub /
+					\Assess — пробные технологии и инструменты, которые сейчас оцениваются. С их участием реализуются только тестовые проекты, в реальных задачах они не используются.
+				<= Info_hold $mol_view sub /
+					\Hold — в этой категории есть экспертиза, но инструменты используются только при поддержке существующих систем — новые проекты на них не запускаются.
+				<= Info_source $mol_view sub /
+					\За основу взят Tech Radar Zalando. Похожие есть у ThoughtWorks. В России концепцию используют, например, Avito и Lamoda.
+		<= Layout $mol_view
+			sub /
+				<= Radar $mol_svg_root
+					view_box \-700 -500 1400 1000
+					sub <= radar_items /
+				<= Legend $mol_list rows <= legend_items /
+	Ring* $mol_svg_circle
+		pos_x \0
+		pos_y \0
+		radius <= ring_radius* \0
+		attr *
+			^
+			fill \none
+			stroke \#bbb
+			stroke-width \1
+	Axis* $mol_svg_line
+		from_x <= axis_from_x* \0
+		from_y <= axis_from_y* \0
+		to_x <= axis_to_x* \0
+		to_y <= axis_to_y* \0
+		attr *
+			^
+			stroke \#bbb
+			stroke-width \1
+	Q_label* $mol_svg_text
+		pos_x <= q_label_x* \0
+		pos_y <= q_label_y* \0
+		text <= q_label_text* \
+		attr *
+			^
+			fill \#333
+			font-size \20
+			font-weight \bold
+			text-anchor \middle
+	R_label* $mol_svg_text
+		pos_x <= r_label_x* \0
+		pos_y \-8
+		text <= r_label_text* \
+		attr *
+			^
+			fill \#888
+			font-size \14
+			font-weight \bold
+			text-anchor \middle
+	Blip_dot* $mol_svg_circle
+		pos_x <= blip_x* \0
+		pos_y <= blip_y* \0
+		radius \12
+		attr *
+			^
+			fill <= blip_color* \#5ba300
+	Blip_num* $mol_svg_text
+		pos_x <= blip_x* \0
+		pos_y <= blip_num_y* \0
+		text <= blip_num* \
+		attr *
+			^
+			fill \#fff
+			font-size \11
+			font-weight \bold
+			text-anchor \middle
+	Q_header* $mol_view
+		sub /
+			<= q_header_text* \
+	R_header* $mol_view
+		sub /
+			<= r_header_text* \
+	Blip_row* $mol_link
+		uri <= blip_row_uri* \
+		external true
+		title <= blip_row_text* \
+	Blip_text* $mol_view
+		sub /
+			<= blip_row_text* \
