@@ -29,10 +29,10 @@
       padding-left: 0.75rem;
       border-left: 3px solid transparent;
     }
-    .info .adopt { border-color: #5ba300; }
-    .info .trial { border-color: #009eb0; }
+    .info .adopt  { border-color: #5ba300; }
+    .info .trial  { border-color: #009eb0; }
     .info .assess { border-color: #c7ba00; }
-    .info .hold { border-color: #e09b96; }
+    .info .hold   { border-color: #e09b96; }
     .info .source {
       margin-top: 0.75rem;
       color: #666;
@@ -41,6 +41,14 @@
     #radar {
       display: block;
       margin: 0 auto;
+    }
+    .error {
+      max-width: 40rem;
+      margin: 2rem auto;
+      padding: 1rem 1.25rem;
+      color: #b00020;
+      background: #fdecea;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -55,102 +63,50 @@
   </div>
 
   <svg id="radar"></svg>
+  <div id="error" class="error" hidden></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
   <script src="https://zalando.github.io/tech-radar/release/radar-0.12.js"></script>
   <script>
-    radar_visualization({
-      repo_url: "https://github.com/hyoo-ru/mam",
-      svg_id: "radar",
-      width: 1450,
-      height: 1000,
-      scale: 1.0,
-      colors: {
-        background: "#fff",
-        grid: "#bbb",
-        inactive: "#ddd",
-      },
-      font_family: "Arial, Helvetica",
-      title: "Tech Radar — $mol Stack",
-      date: "2026.06",
-      quadrants: [
-        { name: "Languages & Frameworks" },
-        { name: "Libraries" },
-        { name: "Techniques" },
-        { name: "Tools & Environment" },
-      ],
-      rings: [
-        { name: "ADOPT", color: "#5ba300" },
-        { name: "TRIAL", color: "#009eb0" },
-        { name: "ASSESS", color: "#c7ba00" },
-        { name: "HOLD", color: "#e09b96" },
-      ],
-      print_layout: true,
-      links_in_new_tabs: true,
-      entries: [
-        // Languages & Frameworks (quadrant 0)
-        { label: "JavaScript", quadrant: 0, ring: 0, moved: 0, link: "https://developer.mozilla.org/ru/docs/Web/JavaScript" },
-        { label: "TypeScript", quadrant: 0, ring: 0, moved: 0, link: "https://www.typescriptlang.org/" },
-        { label: "node.js", quadrant: 0, ring: 0, moved: 0, link: "https://nodejs.org/" },
-        { label: "$mol", quadrant: 0, ring: 0, moved: 0, link: "https://mol.hyoo.ru/" },
-        { label: "view.tree", quadrant: 0, ring: 0, moved: 0, link: "https://mol.hyoo.ru/#!section=docs/=cx1tyu_aduyqj" },
-        { label: "$mol_view", quadrant: 0, ring: 0, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/view/view" },
-        { label: "$mol_wire", quadrant: 0, ring: 0, moved: 0, link: "https://mol.hyoo.ru/#!section=docs/=7fh9am_4wylqp" },
-        { label: "$mol_book2", quadrant: 0, ring: 1, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/book2" },
-        { label: "D", quadrant: 0, ring: 2, moved: 0, link: "https://dlang.org/" },
-        { label: "$mol_view_tree v1", quadrant: 0, ring: 3, moved: -1 },
+    function showError(message) {
+      var el = document.getElementById("error");
+      el.textContent = message;
+      el.hidden = false;
+    }
 
-        // Libraries (quadrant 1)
-        { label: "$mol_fetch", quadrant: 1, ring: 0, moved: 1, link: "https://github.com/hyoo-ru/mam_mol/tree/master/fetch" },
-        { label: "$mol_time", quadrant: 1, ring: 0, moved: 0, link: "https://habr.com/ru/articles/263041/" },
-        { label: "$mol_regexp", quadrant: 1, ring: 0, moved: 0, link: "https://habr.com/ru/articles/561704/" },
-        { label: "$mol_paragraph", quadrant: 1, ring: 0, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/paragraph" },
-        { label: "$mol_labeler", quadrant: 1, ring: 0, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/labeler" },
-        { label: "MarkedText", quadrant: 1, ring: 1, moved: 0, link: "https://habr.com/ru/articles/536448/" },
-        { label: "$mol_ambient", quadrant: 1, ring: 1, moved: 0, link: "https://habr.com/ru/articles/541800/" },
-        { label: "$mol_locale", quadrant: 1, ring: 1, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/locale" },
-        { label: "$mol_data", quadrant: 1, ring: 1, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/data" },
-        { label: "VaryPack", quadrant: 1, ring: 2, moved: 2, link: "https://habr.com/ru/articles/966270/" },
-        { label: "UCF", quadrant: 1, ring: 2, moved: 2, link: "https://habr.com/ru/articles/983042/" },
-        { label: "$milis_log", quadrant: 1, ring: 2, moved: 2 },
-        { label: "$mol_wire_async", quadrant: 1, ring: 3, moved: -1 },
-
-        // Techniques (quadrant 2)
-        { label: "Виртуализация рендеринга", quadrant: 2, ring: 0, moved: 0, link: "https://habr.com/ru/articles/537388/" },
-        { label: "CSS-in-TS", quadrant: 2, ring: 0, moved: 0, link: "https://habr.com/ru/articles/523646/" },
-        { label: "ORP (объектная реактивность)", quadrant: 2, ring: 0, moved: 0, link: "https://habr.com/ru/articles/330466/" },
-        { label: "SPA", quadrant: 2, ring: 0, moved: 0 },
-        { label: "i18n", quadrant: 2, ring: 0, moved: 0, link: "https://github.com/hyoo-ru/mam_mol/tree/master/locale" },
-        { label: "Unit-testing", quadrant: 2, ring: 0, moved: 0 },
-        { label: "Multirepo", quadrant: 2, ring: 0, moved: 0 },
-        { label: "Repo Template", quadrant: 2, ring: 0, moved: 0 },
-        { label: "Versionless", quadrant: 2, ring: 0, moved: 0 },
-        { label: "Sync code через fiber", quadrant: 2, ring: 1, moved: 1, link: "https://github.com/hyoo-ru/mam_mol/tree/master/wire" },
-        { label: "Фрактальное тестирование", quadrant: 2, ring: 1, moved: 0, link: "https://habr.com/ru/articles/510824/" },
-        { label: "Mathematics Driven Design", quadrant: 2, ring: 1, moved: 0, link: "https://habr.com/ru/articles/527574/" },
-        { label: "Local-first архитектура", quadrant: 2, ring: 2, moved: 0 },
-        { label: "Минимакс при принятии решений", quadrant: 2, ring: 2, moved: 0, link: "https://habr.com/ru/articles/786640/" },
-        { label: "SEO", quadrant: 2, ring: 2, moved: 0 },
-        { label: "try/catch в wire-методах", quadrant: 2, ring: 3, moved: 0 },
-        { label: "Ручная разметка списков", quadrant: 2, ring: 3, moved: 0 },
-
-        // Tools & Environment (quadrant 3)
-        { label: "MAM", quadrant: 3, ring: 0, moved: 0, link: "https://habr.com/ru/articles/456288/" },
-        { label: "view-tree-lsp", quadrant: 3, ring: 0, moved: 1 },
-        { label: "GitHub Pages", quadrant: 3, ring: 0, moved: 0, link: "https://pages.github.com/" },
-        { label: "GitHub Template", quadrant: 3, ring: 0, moved: 0, link: "https://docs.github.com/repositories/creating-and-managing-repositories/creating-a-template-repository" },
-        { label: "npm", quadrant: 3, ring: 0, moved: 0, link: "https://www.npmjs.com/" },
-        { label: "Giper Baza", quadrant: 3, ring: 1, moved: 2 },
-        { label: "$mol_app_bench", quadrant: 3, ring: 1, moved: 0, link: "https://habr.com/ru/articles/322162/" },
-        { label: "$mol_func_sandbox", quadrant: 3, ring: 1, moved: 0, link: "https://habr.com/ru/articles/507586/" },
-        { label: "$mol_docs (Storybook)", quadrant: 3, ring: 1, moved: 0 },
-        { label: "Mol Pages", quadrant: 3, ring: 1, moved: 0, link: "https://page.hyoo.ru/" },
-        { label: "Tauri", quadrant: 3, ring: 2, moved: 1 },
-        { label: "$hyoo_page", quadrant: 3, ring: 2, moved: 0, link: "https://page.hyoo.ru/" },
-        { label: "$hyoo_crus", quadrant: 3, ring: 3, moved: -1 },
-        { label: "Mol landing", quadrant: 3, ring: 3, moved: 0 },
-      ],
-    });
+    fetch("./config.json")
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("config.json: HTTP " + response.status);
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        radar_visualization({
+          repo_url: "https://github.com/hyoo-ru/mam",
+          svg_id: "radar",
+          width: 1450,
+          height: 1000,
+          scale: 1.0,
+          colors: {
+            background: "#fff",
+            grid: "#bbb",
+            inactive: "#ddd",
+          },
+          font_family: "Arial, Helvetica",
+          title: data.title || "Tech Radar",
+          date: data.date,
+          quadrants: data.quadrants,
+          rings: data.rings,
+          print_layout: true,
+          links_in_new_tabs: true,
+          entries: data.entries,
+        });
+      })
+      .catch(function (err) {
+        console.error(err);
+        showError("Не удалось загрузить config.json. Запустите через локальный сервер (например: npx serve .).");
+      });
   </script>
 </body>
 </html>

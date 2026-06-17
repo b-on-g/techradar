@@ -23,6 +23,7 @@ jobs:
               run: |
                   mkdir -p bog/techradar/app/-/zalando
                   cp bog/techradar/index2.html bog/techradar/app/-/zalando/index.html
+                  cp bog/techradar/config.json bog/techradar/app/-/zalando/config.json
 
             - uses: hyoo-ru/gh-deploy@v4.4.1
               if: github.ref == 'refs/heads/main'
