@@ -97,10 +97,28 @@ namespace $.$$ {
 			padding: $mol_gap.block,
 		},
 
-		Radar: {
+		Radar_box: {
+			position: 'relative',
 			width: '100%',
 			maxWidth: '1100px',
-			minHeight: '600px',
+			aspectRatio: '14 / 10',
+		},
+
+		Radar: {
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			width: '100%',
+			height: '100%',
+		},
+
+		Pops: {
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			width: '100%',
+			height: '100%',
+			pointerEvents: 'none',
 		},
 
 		Legend: {

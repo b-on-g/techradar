@@ -25,6 +25,6 @@ jobs:
                   cp bog/techradar/index2.html bog/techradar/app/-/zalando/index.html
 
             - uses: hyoo-ru/gh-deploy@v4.4.1
-              if: github.ref == 'refs/heads/master'
+              if: github.ref == 'refs/heads/main'
               with:
                   folder: 'bog/techradar/app/-'

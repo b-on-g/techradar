@@ -227,6 +227,35 @@ namespace $.$$ {
 			} )
 		}
 
+		blip_pop_text( id: number ) {
+			return this.entries()[ id ].label
+		}
+
+		blip_pops() {
+			return this.entries().map( ( _, i ) => this.Blip_pop( i ) )
+		}
+
+		@ $mol_mem_key
+		Blip_pop( id: number ) {
+			const pop = super.Blip_pop( id )
+			const view = pop as unknown as { style: () => Record<string, string> }
+			view.style = () => {
+				const pos = this.blip_positions()[ id ]
+				const leftPct = ( pos.x + 700 ) / 14
+				const topPct = ( pos.y + 500 ) / 10
+				return {
+					position: 'absolute',
+					left: `${ leftPct }%`,
+					top: `${ topPct }%`,
+					width: '24px',
+					height: '24px',
+					transform: 'translate(-50%, -50%)',
+					pointerEvents: 'auto',
+				}
+			}
+			return pop
+		}
+
 	}
 
 }
