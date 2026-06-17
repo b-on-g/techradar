@@ -8629,6 +8629,24 @@ var $;
 			(obj.theme_auto) = () => ((this.Theme()));
 			return obj;
 		}
+		Header_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Tech Radar — $mol Stack"]);
+			return obj;
+		}
+		header_date_text(){
+			return "2026.06";
+		}
+		Header_date(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.header_date_text())]);
+			return obj;
+		}
+		Header(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Header_title()), (this.Header_date())]);
+			return obj;
+		}
 		Info_intro(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => (["От центра к периферии радара идут четыре круга:"]);
@@ -8680,8 +8698,8 @@ var $;
 			return [];
 		}
 		Q_block_techniques_list(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.q_block_techniques_items()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.q_block_techniques_items()));
 			return obj;
 		}
 		Q_block_techniques(){
@@ -8698,8 +8716,8 @@ var $;
 			return [];
 		}
 		Q_block_tools_list(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.q_block_tools_items()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.q_block_tools_items()));
 			return obj;
 		}
 		Q_block_tools(){
@@ -8716,8 +8734,8 @@ var $;
 			return [];
 		}
 		Q_block_libraries_list(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.q_block_libraries_items()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.q_block_libraries_items()));
 			return obj;
 		}
 		Q_block_libraries(){
@@ -8734,8 +8752,8 @@ var $;
 			return [];
 		}
 		Q_block_languages_list(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.q_block_languages_items()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.q_block_languages_items()));
 			return obj;
 		}
 		Q_block_languages(){
@@ -8876,6 +8894,7 @@ var $;
 		}
 		body(){
 			return [
+				(this.Header()), 
 				(this.Info()), 
 				(this.Layout()), 
 				(this.Forms_legend())
@@ -8954,6 +8973,9 @@ var $;
 	};
 	($mol_mem(($.$bog_techradar_app.prototype), "Theme"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Lights"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Header_title"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Header_date"));
+	($mol_mem(($.$bog_techradar_app.prototype), "Header"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Info_intro"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Info_adopt"));
 	($mol_mem(($.$bog_techradar_app.prototype), "Info_trial"));
@@ -9335,6 +9357,9 @@ var $;
             entries() {
                 return this.config().entries;
             }
+            header_date_text() {
+                return this.config().date || '';
+            }
             hovered_blip(next) {
                 return next ?? null;
             }
@@ -9578,6 +9603,26 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_techradar_app, {
+            Header: {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: {
+                    top: $mol_gap.block,
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+            },
+            Header_title: {
+                display: 'block',
+                color: $bog_theme.text,
+                font: { size: '28px', weight: 700 },
+            },
+            Header_date: {
+                display: 'block',
+                color: $bog_theme.shade,
+                font: { size: '13px' },
+                padding: { top: '2px' },
+            },
             Info: {
                 display: 'flex',
                 flexDirection: 'column',
@@ -9620,7 +9665,7 @@ var $;
             },
             Layout: {
                 display: 'grid',
-                gridTemplateColumns: '240px 1fr 240px',
+                gridTemplateColumns: '260px 1fr 260px',
                 gridTemplateRows: 'auto auto',
                 gridTemplateAreas: '"techniques radar tools" "libraries radar languages"',
                 gap: $mol_gap.text,
@@ -9649,27 +9694,43 @@ var $;
             },
             Q_block_techniques_title: {
                 display: 'block',
-                font: { size: '15px', weight: 700 },
+                font: { size: '20px', weight: 700 },
                 color: $bog_theme.text,
-                padding: { bottom: '2px' },
+                padding: { bottom: '4px' },
             },
             Q_block_tools_title: {
                 display: 'block',
-                font: { size: '15px', weight: 700 },
+                font: { size: '20px', weight: 700 },
                 color: $bog_theme.text,
-                padding: { bottom: '2px' },
+                padding: { bottom: '4px' },
             },
             Q_block_libraries_title: {
                 display: 'block',
-                font: { size: '15px', weight: 700 },
+                font: { size: '20px', weight: 700 },
                 color: $bog_theme.text,
-                padding: { bottom: '2px' },
+                padding: { bottom: '4px' },
             },
             Q_block_languages_title: {
                 display: 'block',
-                font: { size: '15px', weight: 700 },
+                font: { size: '20px', weight: 700 },
                 color: $bog_theme.text,
-                padding: { bottom: '2px' },
+                padding: { bottom: '4px' },
+            },
+            Q_block_techniques_list: {
+                display: 'flex',
+                flexDirection: 'column',
+            },
+            Q_block_tools_list: {
+                display: 'flex',
+                flexDirection: 'column',
+            },
+            Q_block_libraries_list: {
+                display: 'flex',
+                flexDirection: 'column',
+            },
+            Q_block_languages_list: {
+                display: 'flex',
+                flexDirection: 'column',
             },
             Radar_box: {
                 gridArea: 'radar',
@@ -9694,11 +9755,10 @@ var $;
             },
             R_header: {
                 display: 'block',
-                font: { size: '12px', weight: 700 },
+                font: { size: '13px', weight: 700 },
                 color: $bog_theme.shade,
                 padding: {
-                    top: $mol_gap.text,
-                    bottom: '1px',
+                    top: '6px',
                 },
                 '@': {
                     'data-ring': {
@@ -9713,15 +9773,15 @@ var $;
                 display: 'block',
                 color: $bog_theme.text,
                 textDecoration: 'none',
-                padding: { top: '1px', bottom: '1px' },
                 font: { size: '12px' },
+                lineHeight: '1.5',
                 userSelect: 'none',
             },
             Blip_text: {
                 display: 'block',
                 color: $bog_theme.text,
-                padding: { top: '1px', bottom: '1px' },
                 font: { size: '12px' },
+                lineHeight: '1.5',
                 userSelect: 'none',
             },
             Forms_legend: {

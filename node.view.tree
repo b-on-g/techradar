@@ -356,6 +356,12 @@ $bog_techradar_app $mol_page
 		<= Lights $bog_theme_toggle
 			theme_auto <= Theme
 	body /
+		<= Header $mol_view
+			sub /
+				<= Header_title $mol_view sub /
+					\Tech Radar — $mol Stack
+				<= Header_date $mol_view sub /
+					<= header_date_text \2026.06
 		<= Info $mol_view
 			sub /
 				<= Info_intro $mol_view sub /
@@ -376,22 +382,22 @@ $bog_techradar_app $mol_page
 					sub /
 						<= Q_block_techniques_title $mol_view sub /
 							\Techniques
-						<= Q_block_techniques_list $mol_list rows <= q_block_techniques_items /
+						<= Q_block_techniques_list $mol_view sub <= q_block_techniques_items /
 				<= Q_block_tools $mol_view
 					sub /
 						<= Q_block_tools_title $mol_view sub /
 							\Tools & Environment
-						<= Q_block_tools_list $mol_list rows <= q_block_tools_items /
+						<= Q_block_tools_list $mol_view sub <= q_block_tools_items /
 				<= Q_block_libraries $mol_view
 					sub /
 						<= Q_block_libraries_title $mol_view sub /
 							\Libraries
-						<= Q_block_libraries_list $mol_list rows <= q_block_libraries_items /
+						<= Q_block_libraries_list $mol_view sub <= q_block_libraries_items /
 				<= Q_block_languages $mol_view
 					sub /
 						<= Q_block_languages_title $mol_view sub /
 							\Languages & Frameworks
-						<= Q_block_languages_list $mol_list rows <= q_block_languages_items /
+						<= Q_block_languages_list $mol_view sub <= q_block_languages_items /
 				<= Radar_box $mol_view
 					sub /
 						<= Radar $mol_svg_root
