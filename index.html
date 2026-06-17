@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tech Radar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+    }
+    #radar {
+      display: block;
+      margin: 0 auto;
+    }
+    .error {
+      max-width: 40rem;
+      margin: 2rem auto;
+      padding: 1rem 1.25rem;
+      color: #b00020;
+      background: #fdecea;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <svg id="radar"></svg>
+  <div id="error" class="error" hidden></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://zalando.github.io/tech-radar/release/radar-0.12.js"></script>
+  <script>
+    function showError(message) {
+      var el = document.getElementById("error");
+      el.textContent = message;
+      el.hidden = false;
+    }
+
+    fetch("./config.json")
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("config.json: HTTP " + response.status);
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        radar_visualization({
+          repo_url: "https://github.com/zalando/tech-radar",
+          svg_id: "radar",
+          width: 1450,
+          height: 1000,
+          scale: 1.0,
+          colors: {
+            background: "#fff",
+            grid: "#bbb",
+            inactive: "#ddd",
+          },
+          font_family: "Arial, Helvetica",
+          title: "Tech Radar",
+          date: data.date,
+          quadrants: [
+            { name: "Languages & Frameworks" },
+            { name: "Libraries" },
+            { name: "Techniques" },
+            { name: "Tools & Environment" },
+          ],
+          rings: [
+            { name: "ADOPT", color: "#5ba300" },
+            { name: "TRIAL", color: "#009eb0" },
+            { name: "ASSESS", color: "#c7ba00" },
+            { name: "HOLD", color: "#e09b96" },
+          ],
+          print_layout: true,
+          links_in_new_tabs: true,
+          entries: data.entries,
+        });
+      })
+      .catch(function (err) {
+        console.error(err);
+        showError("Не удалось загрузить config.json. Запустите через локальный сервер (например: npx serve .).");
+      });
+  </script>
+</body>
+</html>
