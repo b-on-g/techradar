@@ -194,6 +194,7 @@
     "$mol_svg_group",
     "$mol_pop_over",
     "$mol_link",
+    "$mol_dom_safe",
     "$mol_fetch",
     "$mol_rest_code",
     "$mol_rest",
