@@ -163,6 +163,7 @@
     "$bog_theme_picker",
     "$mol_string",
     "$mol_hotkey",
+    "$mol_hotkey2",
     "$mol_keyboard_code",
     "$mol_keyboard",
     "$mol_list",
