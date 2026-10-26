@@ -4292,7 +4292,7 @@ var $;
             boxSizing: 'border-box',
             willChange: 'scroll-position',
             scroll: {
-                padding: [rem(.75), 0],
+                padding: ['2.5rem', 0],
             },
             maxHeight: per(100),
             maxWidth: per(100),
@@ -8630,7 +8630,11 @@ var $;
         '': { id: $mol_dom_safe_attr },
         // special
         a: { href: $mol_dom_safe_uri },
-        img: { src: $mol_dom_safe_uri },
+        img: {
+            src: $mol_dom_safe_uri,
+            width: $mol_dom_safe_attr,
+            height: $mol_dom_safe_attr,
+        },
         object: { src: $mol_dom_safe_uri },
         // blocks
         div: {},
